@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	
+</head>
+<body>
+	<div class="list">
+		<ul id="list1"> 
+			<li class="li_a" onclick="new_el(this)">A</li>
+			<li class="li_b" onclick="new_el(this)">B</li>
+			<li class="li_c" onclick="new_el(this)">C</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		function new_el(id){
+			event.stopPropagation();
+			var txt= id.firstChild.nodeValue;
+			var x = id.childElementCount;
+			if (x==0) {
+				var ul=document.createElement('ul');
+				var li=document.createElement('li');
+				li.setAttribute('id', 'li'+1);
+				li.setAttribute('onclick', 'new_el(this)');			
+				id.appendChild(ul);
+				ul.appendChild(li);
+				li.appendChild(document.createTextNode(txt + 1));
+				
+			}
+			else{
+				var child = id.firstElementChild;
+				var i= child.childElementCount + 1;
+				var li=document.createElement('li');
+				li.setAttribute('id', 'li'+i);
+				li.setAttribute('onclick', 'new_el(this)');			
+				child.appendChild(li);
+				li.appendChild(document.createTextNode(txt + i));
+			}
+		}
+	</script>
+</body>
+</html>
